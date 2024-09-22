@@ -1,0 +1,104 @@
+{
+    "appbar":{
+        "username":"User Name"
+    },
+    "checkInSale":{
+        "commenceWork":"Commence Work",
+        "build":{
+            "tabbar":{
+                "tab1":"General",
+                "tab2":"Project",
+                "tab3":"Material",
+                "tab4":"Tracking Work"
+            }
+        },
+        "general":{
+            "title":"General"
+        },
+        "project":{
+            "title":"Project",
+            "projectName":"Project Name",
+            "projectType":"Project Type",
+            "buildingType":"Building Type",
+            "agencyType":"Agency Type",
+            "projectPhases":"Project Phases",
+            "typesOfWorkSurveyed":"Types Of Work Surveyed",
+            "projectGradeSpec":"Project Grade Spec",
+            "projectValue":"Project Value",
+            "projectOwnerInformation":"Project Owner Information",
+            "projectOwner":"Project Owner",
+            "relatedPersonInformation":"Related Person Information",
+            "relatedPersonInformationType":"Related Person Information Type"
+        },
+        "material":{
+            "title":"Material",
+            "UsableArea": "Usable Area",
+            "AreaSize": "Area Size"
+        },
+        "trackingWork":{
+            "title":"Tracking Work"
+        }
+    },
+    "general":{
+        "all":"All",
+        "name":"Name",
+        "deviceType":"Device Type",
+        "add":"Add",
+        "date":"Date",
+        "time":"Time",
+        "location":"Location",
+        "companyName":"Company Name",
+        "personName":"Person's Name",
+        "listOfPeople":"List Of People",
+        "detail":"Detail",
+        "guid":"GUID",
+        "note":"Note",
+        "workCommencePhoto":"Work Commence Photo",
+        "workCommenceData":"Work Commence",
+        "customer":"Customer",
+        "commission":"Commission",
+        "moreReasons":"More Reasons",
+        "material":"Material",
+        "search":"Search",
+        "unit":"Unit",
+        "tableList":"Table List",
+        "day":"Day",
+        "month":"Month",
+        "year":"Year",
+        "plan":"Plan",
+        "onDate":"On",
+        "otherPleaseSpecify":"Other (Please Specify)",
+        "others":"Other ",
+        "moreDetail":"More Detail"
+    },
+    "button":{
+        "saveData":"Save Data",
+        "save":"Save",
+        "okay":"Okay",
+        "closeJob":"Close Job",
+        "cancel":"Cancel"
+    },
+    "month":{
+        "january":"January",
+        "february":"February",
+        "march":"March",
+        "april":"April",
+        "may":"May",
+        "june":"June",
+        "july":"July",
+        "august":"August",
+        "september":"September",
+        "october":"October",
+        "november":"November",
+        "december":"December"
+    },
+    "day":{
+        "monday":"Monday",
+        "tuesday":"Tuesday",
+        "wednesday":"Wednesday",
+        "thursday":"Thursday",
+        "friday":"Friday",
+        "saturday":"Saturday",
+        "sunday":"Sunday"
+    }
+}

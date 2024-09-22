@@ -1,0 +1,104 @@
+{
+    "appbar": {
+        "username": "ชื่อผู้ใช้งาน"
+    },
+    "checkInSale": {
+        "commenceWork": "การเข้าทำงาน",
+        "build": {
+            "tabbar": {
+                "tab1": "ข้อมูลทั่วไป",
+                "tab2": "ข้อมูลโครงการ",
+                "tab3": "ข้อมูลวัสดุ",
+                "tab4": "การติดตามงาน"
+            }
+        },
+        "general": {
+            "title": "ข้อมูลทั่วไป"
+        },
+        "project": { 
+            "title": "ข้อมูลโครงการ",
+            "projectName": "ชื่อโครงการ",
+            "projectType": "ประเภทโครงการ",
+            "buildingType": "ประเภทอาคาร",
+            "agencyType": "ประเภทหน่วยงาน",
+            "projectPhases": "ขั้นตอนโครงการ",
+            "typesOfWorkSurveyed": "ประเภทงานที่เข้าสำรวจ",
+            "projectGradeSpec": "เกรดสเปคโครงการ",
+            "projectValue": "มูลค่าโครงการ",
+            "projectOwnerInformation": "ข้อมูลเจ้าของโครงการ",
+            "projectOwner": "ชื่อเจ้าของโครงการ",
+            "relatedPersonInformation": "ข้อมูลผู้เกี่ยวข้อง",
+            "relatedPersonInformationType": "ประเภทข้อมูลผู้เกี่ยวข้อง"
+        },
+        "material": {
+            "title": "ข้อมูลวัสดุ",
+            "UsableArea": "พื้นที่ใช้งาน",
+            "AreaSize": "ปริมาณพื้นที่"
+        },
+        "trackingWork": {
+            "title": "ข้อมูลการติดตามงาน"
+        }
+    },
+    "general": {
+        "all": "ทั้งหมด",
+        "name": "ชื่อ",
+        "deviceType": "ประเภทอุปกรณ์",
+        "add": "เพิ่ม",
+        "date": "วันที่",
+        "time": "เวลา",
+        "location": "สถานที่",
+        "companyName": "ชื่อบริษัท",
+        "personName": "ชื่อบุคคล",
+        "listOfPeople": "รายชื่อบุคคล",
+        "detail": "รายละเอียด",
+        "guid": "GUID",
+        "note": "หมายเหตุ",
+        "workCommencePhoto": "รูปภาพการเข้างาน",
+        "workCommenceData": "ข้อมูลการเข้างาน",
+        "customer": "ลูกค้า",
+        "commission": "ค่าคอมมิชชั่น",
+        "moreReasons": "เหตุผลเพิ่มเติม",
+        "material": "วัสดุ",
+        "search": "ค้นหา",
+        "unit": "หน่วย",
+        "tableList": "รายการตาราง",
+        "day": "วัน",
+        "month": "เดือน",
+        "year": "ปี",
+        "plan": "แผนงาน",
+        "onDate": "ประจำวันที่",
+        "otherPleaseSpecify": "อื่นๆ (โปรดระบุ)",
+        "others": "อื่นๆ ",
+        "moreDetail": "รายละเอียดเพิ่มเติม"
+    },
+    "button": {
+        "saveData": "บันทึกข้อมูล",
+        "save": "บันทึก",
+        "okay": "ตกลง",
+        "closeJob": "ปิดงาน",
+        "cancel": "ยกเลิก"
+    },
+    "month": {
+        "january": "มกราคม",
+        "february": "กุมภาพันธ์",
+        "march": "มีนาคม",
+        "april": "เมษายน",
+        "may": "พฤษภาคม",
+        "june": "มิถุนายน",
+        "july": "กรกฎาคม",
+        "august": "สิงหาคม",
+        "september": "กันยายน",
+        "october": "ตุลาคม",
+        "november": "พฤศจิกายน",
+        "december": "ธันวาคม"
+    },
+    "day": {
+        "monday": "จันทร์",
+        "tuesday": "อังคาร",
+        "wednesday": "พุธ",
+        "thursday": "พฤหัสบดี",
+        "friday": "ศุกร์",
+        "saturday": "เสาร์",
+        "sunday": "อาทิตย์"
+    }
+}

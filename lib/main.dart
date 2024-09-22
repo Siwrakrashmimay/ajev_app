@@ -1,52 +1,63 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'main/homeviewbottomBar/view-model/homebottomBarViewModel.dart';
-import 'main/login/view/loginview.dart';
-import 'main/register/view-model/signup_view_model.dart';
-import 'utils/navigation/navigation_constants.dart';
-import 'utils/navigation/navigation_route.dart';
-import 'Provider/user_data_providart.dart'; // Ensure correct import
 
-void main() {
+import 'config/config.dart';
+import 'core/app_lifecycle_tracker/app_lifecycle_tracker.dart';
+import 'core/init/constants/app/app_constant.dart';
+import 'core/init/langs/language_manger.dart';
+import 'core/init/navigation/navigation_route.dart';
+import 'provider/provider_list.dart';
+
+void main() async {
+  await _init();
+  runApp(
+    MultiProvider(
+      providers: [...ApplicationProvider.instance.dependItems],
+      child: EasyLocalization(
+        supportedLocales: LanguageManager.instance.supportedLocales,
+        path: AppConstants.LANG_ASSET_PATH,
+        fallbackLocale: LanguageManager.instance.thLocale,
+        startLocale: LanguageManager.instance.thLocale,
+        child: const AppLifecycleTracker(
+          child: MyApp(),
+        ),
+      ),
+    ),
+  );
+}
+
+Future<void> _init() async {
+  Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
+  await AppFirebase.ensureInitialized();
+  await AppLocalNotificationPlugin.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) {
-    runApp(const MyApp());
-  });
+  ]);
+  EasyLocalization.logger.enableBuildModes = [];
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => HomeBottomBarViewModel()),
-        ChangeNotifierProvider(
-            create: (_) => UserDataProvider()), // Add UserDataProvider
-        ChangeNotifierProvider(
-            create: (_) =>
-                AuthViewModel(context: context)), // Add AuthViewModel
-      ],
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: NavigationRoute.instance.generateRoute,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          fontFamily: 'Prompt',
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const LoginPage(),
-        initialRoute: AppNavConstants.LOGIN,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      themeMode: ThemeMode.system,
+      theme: AppTheme.lightTheme(context),
+      darkTheme: AppTheme.darkTheme(context),
+      // home: const AttendanceRecordFormScreen(),
+      onGenerateRoute: NavigationRoute.instance.generateRoute,
     );
   }
 }
