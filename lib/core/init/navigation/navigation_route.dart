@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../app/authentication/login/view/login_screen.dart';
 import '../../../app/authentication/resgister/view/resgister_screen.dart';
+import '../../../app/main/addnewuser/view/addnewuser_screen.dart';
 import '../../../app/splash/view/splash_screen.dart';
 import '../../widgets/not_found_navigation.dart';
 import 'navigation_constans.dart';
@@ -40,6 +41,13 @@ class NavigationRoute {
         return normalNavigate(
           const MainScreen(),
           AppNavConstants.MAIN_PANG,
+          settings.arguments,
+        );
+
+      case AppNavConstants.ADD_NEW_USER:
+        return normalNavigate(
+          const AddnewuserScreen(),
+          AppNavConstants.ADD_NEW_USER,
           settings.arguments,
         );
 

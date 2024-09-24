@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:ajev_application/core/extension/extension.dart';
 import 'package:flutter/material.dart';
 import '../init/constants/image/image_constants.dart';
@@ -6,23 +8,24 @@ import 'app_image_view.dart';
 import 'inkwell.dart';
 
 class AppBars {
-  static AppBar basic(BuildContext context,
-      {Widget? leading,
-      EdgeInsetsGeometry? paddingAppBar,
-      void Function()? onTapLeading,
-      bool divider = false,
-      Color? backgroundColor,
-      Color? surfaceTintColor,
-      Widget? widget,
-      String? nameWidget,
-      dynamic bottom,
-      String? name,
-      bool automaticallyImplyLeading = false}) {
+  static AppBar basic(
+    BuildContext context, {
+    Widget? leading,
+    EdgeInsetsGeometry? paddingAppBar,
+    void Function()? onTapLeading,
+    bool divider = false,
+    Color? backgroundColor,
+    Color? surfaceTintColor,
+    Widget? widget,
+    String? nameWidget,
+    dynamic bottom,
+    String? name,
+  }) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: backgroundColor ?? Colors.white, // สีพื้นหลังเป็นสีขาว
+      backgroundColor: backgroundColor ?? Colors.white,
       surfaceTintColor: surfaceTintColor,
-      elevation: 0, // ปรับ elevation ให้อยู่ในระดับต่ำสุด
+      elevation: 0,
       title: SizedBox(
         height: kToolbarHeight,
         width: context.width,
@@ -32,10 +35,10 @@ class AppBars {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Icon arrow back ทางซ้าย
-              automaticallyImplyLeading
+              nameWidget == null
                   ? Container(
                       padding: EdgeInsets.only(
+                        top: context.paddingScreen,
                         left: context.paddingScreen,
                         right: context.normalValue,
                       ),
@@ -45,7 +48,7 @@ class AppBars {
                         child: leading ??
                             Icon(
                               Icons.arrow_back_ios,
-                              color: Colors.black, // สีของไอคอนเป็นสีดำ
+                              color: Colors.black,
                               size: context.iconSizeButton,
                             ),
                       ),
@@ -69,26 +72,15 @@ class AppBars {
                             ),
                       ),
                     ),
-              // โลโก้ตรงกลาง
-              // AppImageView.imageAsset(
-              //   context,
-              //   name: ImageConstants
-              //       .instance.logoajev, // ปรับชื่อรูปตามที่คุณใช้งาน
-              //   width: 50,
-              //   height: 50,
-              //   fit: BoxFit.contain,
-              // ),
-              // ข้อความทางขวา (เช่นชื่อผู้ใช้)
               Expanded(
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Transform.translate(
-                    offset: const Offset(0, 10), // ขยับในแนวตั้งลง 10 หน่วย
+                    offset: const Offset(0, 10),
                     child: widget ??
                         AppImageView.imageAsset(
                           context,
-                          name: ImageConstants
-                              .instance.logoajev, // ปรับชื่อรูปตามที่คุณใช้งาน
+                          name: ImageConstants.instance.logoajev,
                           width: 40,
                           height: 40,
                           fit: BoxFit.contain,

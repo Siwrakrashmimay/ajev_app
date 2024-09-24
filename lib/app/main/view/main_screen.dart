@@ -3,6 +3,7 @@ import 'package:ajev_application/core/base/base_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/init/constants/image/image_constants.dart';
+import '../../../core/init/navigation/navigation.dart';
 import '../../../core/widgets/app_navbar.dart';
 import '../../../core/widgets/template_screen.dart';
 
@@ -21,9 +22,96 @@ class MainScreen extends StatelessWidget {
               paddingScreen: EdgeInsets.zero,
               showAppbar: true,
               bottomNavigationBar: const CustomNavigationBar(),
-              child: const Center(
-                child: Text('Main Screen'),
-              ));
+              child: Center(child: _buildMainBody(context)));
         });
+  }
+
+  Widget _buildMainBody(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildTopSection(context),
+        const SizedBox(height: 30),
+        _buildBottomSection(context),
+      ],
+    );
+  }
+
+  Widget _buildTopSection(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset(
+          ImageConstants.instance.group48, // Replace with your asset path
+          width: 200,
+          height: 150,
+        ),
+        const SizedBox(height: 10),
+        _buildButton(context, 'ลงข้อมูลลูกค้าใหม่', Colors.white, () {
+          AppNav.toNamed(context, AppNavConstants.ADD_NEW_USER);
+        }, 250, 75),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Text(
+            'ลงข้อมูลสำหรับลูกค้าใหม่ หรือ ลูกค้าที่ซื้อรถเพิ่ม',
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBottomSection(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset(
+          ImageConstants.instance.group75, // Replace with your asset path
+          width: 200,
+          height: 150,
+        ),
+        const SizedBox(height: 10),
+        _buildButton(
+            context, 'ตรวจเช็คข้อมูลรถลูกค้า', Colors.white, () {}, 250, 75),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Text(
+            'ตรวจเช็คข้อมูลรถลูกค้าที่มีในระบบ',
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String text, Color textColor,
+      VoidCallback onPressed, double width, double height) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(40.0),
+        ),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              side: BorderSide.none,
+            ),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+          ),
+          onPressed: onPressed,
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(color: textColor, fontSize: 22),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
