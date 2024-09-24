@@ -2,55 +2,92 @@
 
 import 'package:flutter/material.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
-  const CustomBottomNavBar({super.key});
+import '../../app/main/view/main_screen.dart';
+import '../init/constants/image/image_constants.dart';
+
+class CustomNavigationBar extends StatefulWidget {
+  const CustomNavigationBar({super.key});
 
   @override
-  _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
+  _CustomNavigationBarState createState() => _CustomNavigationBarState();
 }
 
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  int _selectedIndex = 0; // ตั้งค่าเริ่มต้นให้แถบที่ถูกเลือกเริ่มต้นที่หน้าหลัก
+class _CustomNavigationBarState extends State<CustomNavigationBar> {
+  int _selectedIndex = 0; // Set initial selection
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      // เพิ่ม logic การนำทางไปยังหน้าอื่น ๆ ตามที่คุณต้องการ
+      switch (index) {
+        case 0:
+          MainScreen;
+          break;
+        case 1:
+          // Navigate to vehicle info
+          break;
+        case 2:
+          MainScreen; // Navigate to service
+          break;
+        case 3:
+          MainScreen; // Navigate to news
+          break;
+        case 4:
+          MainScreen; // Navigate to account
+          break;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed, // ให้มีแถบที่ไม่เลื่อน
-      backgroundColor: const Color(0xFF1A1A1A), // พื้นหลังสีเข้ม
-      selectedItemColor: Colors.white, // สีของไอคอนและข้อความเมื่อถูกเลือก
-      unselectedItemColor:
-          Colors.white.withOpacity(0.5), // สีของไอคอนและข้อความที่ไม่ได้เลือก
-      currentIndex: _selectedIndex, // แถบที่ถูกเลือก
-      onTap: _onItemTapped, // ฟังก์ชันเมื่อกดเลือกแถบ
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'หน้าหลัก',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.motorcycle),
-          label: 'ข้อมูลรถ',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'บริการ',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.newspaper),
-          label: 'ข่าวสาร',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'บัญชี',
-        ),
-      ],
+    return Container(
+      color: const Color(0xFF1A1A1A), // Background color
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildNavItem(
+            index: 0,
+            iconPath: ImageConstants.instance.home,
+            selectedIconPath: ImageConstants.instance.hometap,
+          ),
+          _buildNavItem(
+            index: 1,
+            iconPath: ImageConstants.instance.bike,
+            selectedIconPath: ImageConstants.instance.biketap,
+          ),
+          _buildNavItem(
+            index: 2,
+            iconPath: ImageConstants.instance.service,
+            selectedIconPath: ImageConstants.instance.servicetap,
+          ),
+          _buildNavItem(
+            index: 3,
+            iconPath: ImageConstants.instance.news,
+            selectedIconPath: ImageConstants.instance.newstap,
+          ),
+          _buildNavItem(
+            index: 4,
+            iconPath: ImageConstants.instance.vector,
+            selectedIconPath: ImageConstants.instance.vectortap,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem({
+    required int index,
+    required String iconPath,
+    required String selectedIconPath,
+  }) {
+    return InkWell(
+      onTap: () => _onItemTapped(index),
+      child: Image.asset(
+        _selectedIndex == index ? selectedIconPath : iconPath,
+        width: 60,
+        height: 60,
+      ),
     );
   }
 }

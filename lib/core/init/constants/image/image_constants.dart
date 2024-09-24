@@ -58,6 +58,21 @@ class ImageConstants {
   String get backgrounddark => toIconPng('Asset 21@4x');
   String get backgrouniconAJ => toImagePng('logoiconajev');
 
+  String get bike => toImagePng('BIKE');
+  String get home => toImagePng('HOME');
+  String get news => toImagePng('NEWS');
+  String get service => toImagePng('SERVICE');
+  String get vector => toImagePng('ACCOUNT(1)');
+
+  String get biketap => toImagePng('BIKE(1)');
+  String get hometap => toImagePng('HOME(1)');
+  String get newstap => toImagePng('NEWS(1)');
+  String get servicetap => toImagePng('SERVICE(1)');
+  String get vectortap => toImagePng('ACCOUNT');
+
+  String get group48 => toImagePng('Group 48');
+  String get group75 => toImagePng('Group 75');
+
   String toIconPng(String name) => 'assets/icons/$name.png';
   String toImagePng(String name) => 'assets/images/$name.png';
 }

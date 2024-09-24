@@ -3,6 +3,7 @@ import 'package:ajev_application/core/base/base_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/init/constants/image/image_constants.dart';
+import '../../../core/widgets/app_navbar.dart';
 import '../../../core/widgets/template_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -19,6 +20,7 @@ class MainScreen extends StatelessWidget {
               imageBackground: ImageConstants.instance.backgrouniconAJ,
               paddingScreen: EdgeInsets.zero,
               showAppbar: true,
+              bottomNavigationBar: const CustomNavigationBar(),
               child: const Center(
                 child: Text('Main Screen'),
               ));
