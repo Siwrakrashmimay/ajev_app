@@ -72,6 +72,10 @@ class ImageConstants {
 
   String get group48 => toImagePng('Group 48');
   String get group75 => toImagePng('Group 75');
+  String get group481 => toImagePng('Group 48 (1)');
+  String get group49 => toImagePng('Group 49');
+  String get group50 => toImagePng('Group 50');
+  String get group51 => toImagePng('Group 51');
 
   String toIconPng(String name) => 'assets/icons/$name.png';
   String toImagePng(String name) => 'assets/images/$name.png';

@@ -1,4 +1,6 @@
 import 'package:ajev_application/app/main/view/main_screen.dart';
+import 'package:ajev_application/app/service/service_part/view/service_part_screen.dart';
+import 'package:ajev_application/app/service/view/service_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../app/authentication/login/view/login_screen.dart';
@@ -48,6 +50,19 @@ class NavigationRoute {
         return normalNavigate(
           const AddnewuserScreen(),
           AppNavConstants.ADD_NEW_USER,
+          settings.arguments,
+        );
+
+      case AppNavConstants.SERVICE:
+        return normalNavigate(
+          const ServiceScreen(),
+          AppNavConstants.SERVICE,
+          settings.arguments,
+        );
+      case AppNavConstants.SERVICE_PART:
+        return normalNavigate(
+          const ServicePartScreen(),
+          AppNavConstants.SERVICE_PART,
           settings.arguments,
         );
 

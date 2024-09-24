@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/main/view/main_screen.dart';
+import '../../app/service/view/service_screen.dart';
 import '../init/constants/image/image_constants.dart';
 
 class CustomNavigationBar extends StatefulWidget {
@@ -23,7 +24,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
           MainScreen;
           break;
         case 1:
-          // Navigate to vehicle info
+          ServiceScreen;
           break;
         case 2:
           MainScreen; // Navigate to service
