@@ -16,6 +16,7 @@ class BuildTemplateMain extends StatelessWidget {
   //Scaffold
   final Key? scaffoldKey;
   final Widget? drawer;
+  final String? nameWidgetAppBar;
   final bool? resizeToAvoidBottomInset;
   final PreferredSizeWidget? appBar;
   final String? imageBackground;
@@ -84,6 +85,7 @@ class BuildTemplateMain extends StatelessWidget {
     this.scrollOnRefresh = true,
     this.currentPerPage = 1,
     this.totalParPages = 1,
+    this.nameWidgetAppBar,
   });
 
   @override
@@ -105,7 +107,7 @@ class BuildTemplateMain extends StatelessWidget {
                         image: AssetImage(
                           imageBackground!,
                         ),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.none,
                       ),
               ),
               child: Scaffold(
@@ -124,6 +126,7 @@ class BuildTemplateMain extends StatelessWidget {
                         paddingAppBar: paddingAppBar,
                         surfaceTintColor: surfaceTintColorAppBar,
                         widget: widgetAppBar,
+                        nameWidget: nameWidgetAppBar,
                         name: provider.userProfile?.fullName,
                       )
                     : null,

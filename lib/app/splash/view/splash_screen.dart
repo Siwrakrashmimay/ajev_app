@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/base/base_screen.dart';
 import '../../../core/init/constants/image/image_constants.dart';
+import '../../../core/init/navigation/navigation.dart';
 import '../../../core/widgets/app_image_view.dart';
 import '../view_model/splash_view_model.dart';
 
@@ -139,7 +140,9 @@ class _SplashScreenState extends State<SplashScreen> {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
           ),
-          onPressed: () {},
+          onPressed: () {
+            AppNav.toNamed(context, AppNavConstants.LOGIN);
+          },
           child: Center(
             child: Text(
               text,

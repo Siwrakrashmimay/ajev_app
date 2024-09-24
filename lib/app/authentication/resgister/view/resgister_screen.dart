@@ -17,6 +17,7 @@ class ResgisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
+        onInit: (viewmodel) {},
         viewmodel: ResgisterViewModel(context: context),
         builder: (context, viewmodel, child, deviceScreen) {
           return BuildTemplateMain(

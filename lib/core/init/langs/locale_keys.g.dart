@@ -1,6 +1,8 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class  LocaleKeys {
+// ignore_for_file: constant_identifier_names
+
+abstract class LocaleKeys {
   static const appbar_username = 'appbar.username';
   static const appbar = 'appbar';
   static const checkInSale_commenceWork = 'checkInSale.commenceWork';
@@ -13,24 +15,38 @@ abstract class  LocaleKeys {
   static const checkInSale_general_title = 'checkInSale.general.title';
   static const checkInSale_general = 'checkInSale.general';
   static const checkInSale_project_title = 'checkInSale.project.title';
-  static const checkInSale_project_projectName = 'checkInSale.project.projectName';
-  static const checkInSale_project_projectType = 'checkInSale.project.projectType';
-  static const checkInSale_project_buildingType = 'checkInSale.project.buildingType';
-  static const checkInSale_project_agencyType = 'checkInSale.project.agencyType';
-  static const checkInSale_project_projectPhases = 'checkInSale.project.projectPhases';
-  static const checkInSale_project_typesOfWorkSurveyed = 'checkInSale.project.typesOfWorkSurveyed';
-  static const checkInSale_project_projectGradeSpec = 'checkInSale.project.projectGradeSpec';
-  static const checkInSale_project_projectValue = 'checkInSale.project.projectValue';
-  static const checkInSale_project_projectOwnerInformation = 'checkInSale.project.projectOwnerInformation';
-  static const checkInSale_project_projectOwner = 'checkInSale.project.projectOwner';
-  static const checkInSale_project_relatedPersonInformation = 'checkInSale.project.relatedPersonInformation';
-  static const checkInSale_project_relatedPersonInformationType = 'checkInSale.project.relatedPersonInformationType';
+  static const checkInSale_project_projectName =
+      'checkInSale.project.projectName';
+  static const checkInSale_project_projectType =
+      'checkInSale.project.projectType';
+  static const checkInSale_project_buildingType =
+      'checkInSale.project.buildingType';
+  static const checkInSale_project_agencyType =
+      'checkInSale.project.agencyType';
+  static const checkInSale_project_projectPhases =
+      'checkInSale.project.projectPhases';
+  static const checkInSale_project_typesOfWorkSurveyed =
+      'checkInSale.project.typesOfWorkSurveyed';
+  static const checkInSale_project_projectGradeSpec =
+      'checkInSale.project.projectGradeSpec';
+  static const checkInSale_project_projectValue =
+      'checkInSale.project.projectValue';
+  static const checkInSale_project_projectOwnerInformation =
+      'checkInSale.project.projectOwnerInformation';
+  static const checkInSale_project_projectOwner =
+      'checkInSale.project.projectOwner';
+  static const checkInSale_project_relatedPersonInformation =
+      'checkInSale.project.relatedPersonInformation';
+  static const checkInSale_project_relatedPersonInformationType =
+      'checkInSale.project.relatedPersonInformationType';
   static const checkInSale_project = 'checkInSale.project';
   static const checkInSale_material_title = 'checkInSale.material.title';
-  static const checkInSale_material_UsableArea = 'checkInSale.material.UsableArea';
+  static const checkInSale_material_UsableArea =
+      'checkInSale.material.UsableArea';
   static const checkInSale_material_AreaSize = 'checkInSale.material.AreaSize';
   static const checkInSale_material = 'checkInSale.material';
-  static const checkInSale_trackingWork_title = 'checkInSale.trackingWork.title';
+  static const checkInSale_trackingWork_title =
+      'checkInSale.trackingWork.title';
   static const checkInSale_trackingWork = 'checkInSale.trackingWork';
   static const checkInSale = 'checkInSale';
   static const general_all = 'general.all';
@@ -91,5 +107,4 @@ abstract class  LocaleKeys {
   static const day_saturday = 'day.saturday';
   static const day_sunday = 'day.sunday';
   static const day = 'day';
-
 }

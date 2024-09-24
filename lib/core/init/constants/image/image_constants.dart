@@ -56,6 +56,7 @@ class ImageConstants {
 
   String get logoajev => toImagePng('Asset_logo@4x');
   String get backgrounddark => toIconPng('Asset 21@4x');
+  String get backgrouniconAJ => toImagePng('logoiconajev');
 
   String toIconPng(String name) => 'assets/icons/$name.png';
   String toImagePng(String name) => 'assets/images/$name.png';

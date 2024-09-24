@@ -1,123 +1,93 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../../../core/base/base_viewmodel.dart';
 import '../../../../core/init/shared_perferences/shared_perferences.dart';
 import '../../../../core/model/otp/otp_sms_model.dart';
-import '../../../../core/utility/formatters.dart';
-import '../../../../provider/global_provider.dart';
-// import '../../../../repo/global_repo.dart';
 import '../../../../repo/login_singup_repo.dart';
-import '../../otp/repo/sms_repo.dart';
+import '../../../../provider/global_provider.dart';
 
 class LoginViewModel extends BaseViewModel {
-  // final UserProfileProvider _userProvider;
   final GlobalProvider _globalProvider;
+  final LoginSingupRepo _loginSingupRepo = LoginSingupRepo();
+  // final OtpSendRepo _otpSendRepo = OtpSendRepo();
+
   LoginViewModel({required BuildContext context})
-      // : _userProvider = context.read<UserProfileProvider>(),
       : _globalProvider = context.read<GlobalProvider>();
 
-  // final _userProfileRepo = UserProfileRepo();
-  // final _globalRepo = GlobalRepo();
-  final _loginSingupRepo = LoginSingupRepo();
+  // Form key for validation
+  final formLoginKey = GlobalKey<FormState>();
 
-  // bool _isPasswordVisible = true;
-  // bool get isPasswordVisible => _isPasswordVisible;
-
-  // set isPasswordVisible(bool value) {
-  //   _isPasswordVisible = value;
-  //   notifyListeners();
-  // }
-  final _otpSendRepo = OtpSendRepo();
-
+  // User input fields
   String _userName = '';
+  String _otpCode = '';
+  bool _agreed = false;
+
+  // Getters and setters
   String get userName => _userName;
   set userName(String value) => _userName = value;
 
-  final formLoginKey = GlobalKey<FormState>();
+  String get otpCode => _otpCode;
+  set otpCode(String value) => _otpCode = value;
 
+  bool get agreed => _agreed;
+  set agreed(bool value) => _agreed = value;
+
+  // Application version details
   String get appVersion => _globalProvider.appVersion;
   String get appBuildNumber => _globalProvider.appBuildNumber;
 
-  // Future<void> prepareInfoLogin() async {
-  //   try {
-  //     // Map bodyData = {
-  //     //   "email": userName,
-  //     //   "password": password,
-  //     // };
-  //     // await postLogin(bodyData: bodyData);
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
+  // OTP model
   OtpMoldel? _otpModel;
   OtpMoldel? get otpModel => _otpModel;
   set otpModel(OtpMoldel? value) => _otpModel = value;
 
-  Future smsPost(BuildContext context, {required String phoneNumber}) async {
+  // Sending OTP via phone number
+  Future<void> sendOtp(String phoneNumber) async {
     try {
       loading = true;
       await _loginSingupRepo.finduser(phoneNumber: phoneNumber);
-      _otpModel =
-          await _otpSendRepo.sendOtpByPhoneNumber(phoneNumber: phoneNumber);
-      _otpModel?.data?.result?.phoneNumber = phoneNumber;
-
+      // _otpModel =
+      // await _otpSendRepo.sendOtpByPhoneNumber(phoneNumber: phoneNumber);
+      // _otpModel?.data?.result?.phoneNumber = phoneNumber;
       loading = false;
     } catch (e) {
-      msgError = '$e';
+      msgError = e.toString();
       loading = false;
       rethrow;
     }
   }
 
-  Future<void> postLogin({
-    required Map bodyData,
-  }) async {
-    try {
-      // final response = await _authRepo.postLogin(bodyData: bodyData);
-
-      // await prepareInfoUpdateUser(userId: response.data?.userData?.id);
-
-      // _userProfileProvider.userProfile = response.data?.userData;
-      // await Singleton.shared.setTokenApi(response.data?.accessToken ?? '');
-      // await Singleton.shared.setUserId(response.data?.userData?.id ?? 0);
-      // await Singleton.shared.setRole(response.data?.userData?.role?.name ?? '');
-      // await Singleton.shared.setName(response.data?.userData?.fullName ?? '');
-      // await _globalRepo.setExpiresAt();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> prepareInfoUpdateUser({
-    required int? userId,
-  }) async {
+  // Preparing user data update
+  Future<void> prepareInfoUpdateUser({required int? userId}) async {
     try {
       String? fcmToken = await Singleton.shared.getFcmToken();
-
-      if (emptyToNull(fcmToken) == null) {
+      if (fcmToken == null) {
         fcmToken = await FirebaseMessaging.instance.getToken();
         await Singleton.shared.setFcmToken(fcmToken ?? '');
-        fcmToken = await Singleton.shared.getFcmToken();
       }
 
-      if (emptyToNull(fcmToken) == null) {
-        throw 'ไม่พบ fcmToken กรุณาปิดแอปพลิเคชันแล้วเปิดใหม่อีกครั้ง';
+      if (fcmToken == null) {
+        throw 'FCM Token not found. Please restart the app.';
       }
-
-      // final platform = AppPlatform.instance.platform;
 
       // Map bodyData = {
-      //   "fcmToken": emptyToNull(fcmToken),
-      //   "platform": emptyToNull(platform),
+      //   "fcmToken": fcmToken,
       //   "lastLoginAtApp": formatToUtcString(DateTime.now()),
       // };
 
-      // await putUpdateUser(userId: userId, bodyData: bodyData);
+      // Add API call for updating user data here.
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Post login function
+  Future<void> postLogin(Map<String, dynamic> bodyData) async {
+    try {
+      // Handle the login post logic here.
     } catch (e) {
       rethrow;
     }

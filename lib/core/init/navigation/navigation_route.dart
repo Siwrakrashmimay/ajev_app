@@ -1,7 +1,7 @@
+import 'package:ajev_application/app/main/view/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../app/authentication/login/view/login_screen.dart';
-import '../../../app/authentication/otp/view/otp_login_screen.dart';
 import '../../../app/authentication/resgister/view/resgister_screen.dart';
 import '../../../app/splash/view/splash_screen.dart';
 import '../../widgets/not_found_navigation.dart';
@@ -29,17 +29,17 @@ class NavigationRoute {
           settings.arguments,
         );
 
-      case AppNavConstants.OTP_LOGIN:
-        return normalNavigate(
-          const OtpLoginView(),
-          AppNavConstants.OTP_LOGIN,
-          settings.arguments,
-        );
-
       case AppNavConstants.REGISTER:
         return normalNavigate(
           const ResgisterScreen(),
           AppNavConstants.REGISTER,
+          settings.arguments,
+        );
+
+      case AppNavConstants.MAIN_PANG:
+        return normalNavigate(
+          const MainScreen(),
+          AppNavConstants.MAIN_PANG,
           settings.arguments,
         );
 

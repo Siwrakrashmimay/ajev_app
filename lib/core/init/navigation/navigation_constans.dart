@@ -17,6 +17,7 @@ class AppNavConstants {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const OTP_LOGIN = '/otp-login';
+  static const MAIN_PANG = 'main';
   // static const ATTENDANCE_RECORD_FORM = '/attendance-record-form';
   // static const USER_PROFILE = '/user-profile';
   // static const PRIVICY_POLICY = '/privicy-policy';
