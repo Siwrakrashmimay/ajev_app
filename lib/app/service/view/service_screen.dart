@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/init/constants/image/image_constants.dart';
 import '../../../core/init/navigation/navigation.dart';
-import '../../../core/widgets/app_navbar.dart';
 import '../../../core/widgets/template_screen.dart';
 import '../view-model/service_view.dart';
 
@@ -21,7 +20,6 @@ class ServiceScreen extends StatelessWidget {
               imageBackground: ImageConstants.instance.backgrouniconAJ,
               paddingScreen: EdgeInsets.zero,
               showAppbar: true,
-              bottomNavigationBar: const CustomNavigationBar(),
               child: Center(child: _buildMainBody(context)));
         });
   }

@@ -1,15 +1,107 @@
-import 'package:ajev_application/app/main/view-model/main_view.dart';
-import 'package:ajev_application/core/base/base_screen.dart';
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
+import '../../../core/base/base_screen.dart';
 import '../../../core/init/constants/image/image_constants.dart';
 import '../../../core/init/navigation/navigation.dart';
-import '../../../core/widgets/app_navbar.dart';
 import '../../../core/widgets/template_screen.dart';
+import '../../bike/view/bike_screen.dart';
+import '../../service/view/service_screen.dart';
+import '../view-model/main_view.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    const MainContentScreen(),
+    const BikeScreen(),
+    const ServiceScreen(),
+    const MainContentScreen(),
+    const MainContentScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages, // Display selected page from list
+      ),
+      bottomNavigationBar: _buildCustomNavigationBar(),
+    );
+  }
+
+  Widget _buildCustomNavigationBar() {
+    return Container(
+      color: const Color(0xFF1A1A1A), // Background color
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildNavItem(
+            index: 0,
+            iconPath: ImageConstants.instance.home,
+            selectedIconPath: ImageConstants.instance.hometap,
+          ),
+          _buildNavItem(
+            index: 1,
+            iconPath: ImageConstants.instance.bike,
+            selectedIconPath: ImageConstants.instance.biketap,
+          ),
+          _buildNavItem(
+            index: 2,
+            iconPath: ImageConstants.instance.service,
+            selectedIconPath: ImageConstants.instance.servicetap,
+          ),
+          _buildNavItem(
+            index: 3,
+            iconPath: ImageConstants.instance.news,
+            selectedIconPath: ImageConstants.instance.newstap,
+          ),
+          _buildNavItem(
+            index: 4,
+            iconPath: ImageConstants.instance.vector,
+            selectedIconPath: ImageConstants.instance.vectortap,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem({
+    required int index,
+    required String iconPath,
+    required String selectedIconPath,
+  }) {
+    return InkWell(
+      onTap: () => _onItemTapped(index),
+      child: Image.asset(
+        _selectedIndex == index ? selectedIconPath : iconPath,
+        width: 60,
+        height: 60,
+      ),
+    );
+  }
+}
+
+class MainContentScreen extends StatelessWidget {
+  const MainContentScreen({super.key});
+
+  @override
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
@@ -21,7 +113,6 @@ class MainScreen extends StatelessWidget {
               imageBackground: ImageConstants.instance.backgrouniconAJ,
               paddingScreen: EdgeInsets.zero,
               showAppbar: true,
-              bottomNavigationBar: const CustomNavigationBar(),
               child: Center(child: _buildMainBody(context)));
         });
   }
@@ -41,7 +132,7 @@ class MainScreen extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          ImageConstants.instance.group48, // Replace with your asset path
+          ImageConstants.instance.group48,
           width: 200,
           height: 150,
         ),
@@ -64,13 +155,14 @@ class MainScreen extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          ImageConstants.instance.group75, // Replace with your asset path
+          ImageConstants.instance.group75,
           width: 200,
           height: 150,
         ),
         const SizedBox(height: 10),
-        _buildButton(
-            context, 'ตรวจเช็คข้อมูลรถลูกค้า', Colors.white, () {}, 250, 75),
+        _buildButton(context, 'ตรวจเช็คข้อมูลรถลูกค้า', Colors.white, () {
+          AppNav.toNamed(context, AppNavConstants.BIKE);
+        }, 250, 75),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(

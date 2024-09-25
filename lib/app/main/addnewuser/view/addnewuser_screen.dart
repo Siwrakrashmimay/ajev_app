@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/base/base_screen.dart';
 import '../../../../core/init/constants/image/image_constants.dart';
-import '../../../../core/widgets/app_navbar.dart';
 import '../../../../core/widgets/template_screen.dart';
 import '../view-model/addnewuser_view.dart';
 
@@ -20,7 +19,6 @@ class AddnewuserScreen extends StatelessWidget {
         return BuildTemplateMain(
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
-          bottomNavigationBar: const CustomNavigationBar(),
           showAppbar: true,
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),

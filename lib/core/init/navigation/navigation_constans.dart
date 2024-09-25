@@ -21,7 +21,10 @@ class AppNavConstants {
   static const ADD_NEW_USER = '/add-new-user';
   static const SERVICE = '/service';
   static const SERVICE_PART = '/service-part';
+  static const BIKE = '/bike';
+  static const BIKE_DETAIL = '/bike-detail';
   static const NOT_FOUND = '/not-found';
+
   // static const ATTENDANCE_RECORD_FORM = '/attendance-record-form';
   // static const USER_PROFILE = '/user-profile';
   // static const PRIVICY_POLICY = '/privicy-policy';
