@@ -38,13 +38,13 @@ class ServicePartScreen extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          ImageConstants.instance.group50,
+          ImageConstants.instance.group51,
           width: 200,
           height: 150,
         ),
         const SizedBox(height: 10),
         _buildButton(context, 'แบตเตอรี่', Colors.white, () {
-          AppNav.toNamed(context, AppNavConstants.ADD_NEW_USER);
+          AppNav.toNamed(context, AppNavConstants.SERVICE_BATTERY);
         }, 250, 75),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
@@ -61,12 +61,14 @@ class ServicePartScreen extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          ImageConstants.instance.group51,
+          ImageConstants.instance.group50,
           width: 200,
           height: 150,
         ),
         const SizedBox(height: 10),
-        _buildButton(context, 'ชิ้นส่วนอะไหล่รภ', Colors.white, () {}, 250, 75),
+        _buildButton(context, 'ชิ้นส่วนอะไหล่รภ', Colors.white, () {
+          AppNav.toNamed(context, AppNavConstants.SERVICE_BIKE);
+        }, 250, 75),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(

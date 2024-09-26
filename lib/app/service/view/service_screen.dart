@@ -44,9 +44,8 @@ class ServiceScreen extends StatelessWidget {
           height: 150,
         ),
         const SizedBox(height: 10),
-        _buildButton(context, 'คิวนัดหมายเข้ารับบริการ', Colors.white, () {
-          AppNav.toNamed(context, AppNavConstants.SERVICE_PART);
-        }, 250, 75),
+        _buildButton(
+            context, 'คิวนัดหมายเข้ารับบริการ', Colors.white, () {}, 250, 75),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(
@@ -67,7 +66,9 @@ class ServiceScreen extends StatelessWidget {
           height: 150,
         ),
         const SizedBox(height: 10),
-        _buildButton(context, 'เบิกอะไหล่', Colors.white, () {}, 250, 75),
+        _buildButton(context, 'เบิกอะไหล่', Colors.white, () {
+          AppNav.toNamed(context, AppNavConstants.SERVICE_PART);
+        }, 250, 75),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(

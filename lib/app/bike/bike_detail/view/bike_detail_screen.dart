@@ -1,3 +1,4 @@
+import 'package:ajev_application/core/extension/extension.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/base/base_screen.dart';
 import '../../../../core/init/constants/image/image_constants.dart';
@@ -31,7 +32,8 @@ class BikeDetailScreen extends StatelessWidget {
       children: [
         Row(
           children: [
-            _buildBikeImageSection(),
+            _buildBikeImageSection(context),
+            SizedBox(width: context.width * 0.05),
             Column(
               children: [
                 _buildDetailRow('Model', 'GODDESS'),
@@ -56,13 +58,13 @@ class BikeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBikeImageSection() {
+  Widget _buildBikeImageSection(BuildContext context) {
     return Column(
       children: [
         Image.asset(
           ImageConstants.instance.evbikenone,
-          width: 230,
-          height: 220,
+          width: context.width * 0.4,
+          height: context.height * 0.2,
           fit: BoxFit.cover,
         ),
       ],
@@ -76,16 +78,15 @@ class BikeDetailScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            // ใช้ LinearGradient เพื่อปรับพื้นหลังของ Container
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color(0xFFD9D9D9), // สีเทาอ่อน #D9D9D9
-                Color(0xFFFFFFFF), // สีขาว #FFFFFF
-                Color(0xFFD9D9D9), // สีเทาอ่อน #D9D9D9
+                Color(0xFFD9D9D9),
+                Color(0xFFFFFFFF),
+                Color(0xFFD9D9D9),
               ],
-              stops: [0.0, 0.5, 1.0], // ตำแหน่งของสีใน Gradient
+              stops: [0.0, 0.5, 1.0],
             ),
             borderRadius: BorderRadius.circular(10.0),
           ),

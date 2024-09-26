@@ -78,6 +78,20 @@ class ImageConstants {
   String get group51 => toImagePng('Group 51');
   String get evbikenone => toImagePng('EV Bike None-01');
 
+  String get batteryampace => toImagePng('Battery Ampace-00');
+  String get batteryphylion1 => toImagePng('Battery Phylion-00 (1)');
+  String get batteryphylion => toImagePng('Battery Phylion-00');
+
+  String get beatsimag00 => toImagePng('Beats_img-00');
+  String get fliximg00 => toImagePng('Flix_img-00');
+  String get goddessimg00 => toImagePng('Goddess_img-00');
+  String get iaming00 => toImagePng('I AM_img-00');
+  String get ncvimg00 => toImagePng('Ncv_img-00');
+  String get taurusimg00 => toImagePng('Taurus_img-00');
+
+  String get rectangle17 => toImagePng('Rectangle 17 (1)');
+  String get rectangle171 => toImagePng('Rectangle 17');
+
   String toIconPng(String name) => 'assets/icons/$name.png';
   String toImagePng(String name) => 'assets/images/$name.png';
 }

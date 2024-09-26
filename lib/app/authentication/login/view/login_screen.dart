@@ -206,7 +206,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           onPressed: () {
             // viewmodel.login();
-            AppNav.toNameAndRemoveUntil(context, AppNavConstants.MAIN_PANG);
+            AppNav.toNameAndRemoveUntil(
+                context, AppNavConstants.MAIN_USER_PANG);
           },
           child: Center(
             child: Text(

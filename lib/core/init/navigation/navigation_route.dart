@@ -1,6 +1,10 @@
+import 'package:ajev_application/app/accuont/ark/view/ark_screen.dart';
 import 'package:ajev_application/app/bike/bike_detail/view/bike_detail_screen.dart';
 import 'package:ajev_application/app/bike/view/bike_screen.dart';
 import 'package:ajev_application/app/main/view/main_screen.dart';
+import 'package:ajev_application/app/main_user/view/main_user_screen.dart';
+import 'package:ajev_application/app/main_user/view_model/main_user_view.dart';
+import 'package:ajev_application/app/service/service_part/service_battary/view/service_battary_screen.dart';
 import 'package:ajev_application/app/service/service_part/view/service_part_screen.dart';
 import 'package:ajev_application/app/service/view/service_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../app/authentication/login/view/login_screen.dart';
 import '../../../app/authentication/resgister/view/resgister_screen.dart';
 import '../../../app/main/addnewuser/view/addnewuser_screen.dart';
+import '../../../app/service/service_part/service_bike/view/service_bike_screen.dart';
 import '../../../app/splash/view/splash_screen.dart';
 import '../../widgets/not_found_navigation.dart';
 import 'navigation_constans.dart';
@@ -79,6 +84,31 @@ class NavigationRoute {
         return normalNavigate(
           const BikeDetailScreen(),
           AppNavConstants.BIKE_DETAIL,
+          settings.arguments,
+        );
+      case AppNavConstants.SERVICE_BATTERY:
+        return normalNavigate(
+          const ServiceBattaryScreen(),
+          AppNavConstants.SERVICE_BATTERY,
+          settings.arguments,
+        );
+      case AppNavConstants.SERVICE_BIKE:
+        return normalNavigate(
+          const ServiceBikeScreen(),
+          AppNavConstants.SERVICE_BIKE,
+          settings.arguments,
+        );
+      case AppNavConstants.ARK:
+        return normalNavigate(
+          const ArkScreen(),
+          AppNavConstants.ARK,
+          settings.arguments,
+        );
+
+      case AppNavConstants.MAIN_USER_PANG:
+        return normalNavigate(
+          const MainUserScreen(),
+          AppNavConstants.MAIN_USER_PANG,
           settings.arguments,
         );
 

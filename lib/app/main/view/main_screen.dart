@@ -6,7 +6,9 @@ import '../../../core/base/base_screen.dart';
 import '../../../core/init/constants/image/image_constants.dart';
 import '../../../core/init/navigation/navigation.dart';
 import '../../../core/widgets/template_screen.dart';
+import '../../accuont/view/accuont_screen.dart';
 import '../../bike/view/bike_screen.dart';
+import '../../news/view/news_screen.dart';
 import '../../service/view/service_screen.dart';
 import '../view-model/main_view.dart';
 
@@ -24,8 +26,8 @@ class _MainScreenState extends State<MainScreen> {
     const MainContentScreen(),
     const BikeScreen(),
     const ServiceScreen(),
-    const MainContentScreen(),
-    const MainContentScreen(),
+    const NewsScreen(),
+    const AccuontScreen(),
   ];
 
   void _onItemTapped(int index) {

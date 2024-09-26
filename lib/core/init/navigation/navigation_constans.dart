@@ -23,6 +23,10 @@ class AppNavConstants {
   static const SERVICE_PART = '/service-part';
   static const BIKE = '/bike';
   static const BIKE_DETAIL = '/bike-detail';
+  static const SERVICE_BATTERY = '/service-battery';
+  static const MAIN_USER_PANG = '/main-user';
+  static const SERVICE_BIKE = '/service-bike';
+  static const ARK = '/ark';
   static const NOT_FOUND = '/not-found';
 
   // static const ATTENDANCE_RECORD_FORM = '/attendance-record-form';
