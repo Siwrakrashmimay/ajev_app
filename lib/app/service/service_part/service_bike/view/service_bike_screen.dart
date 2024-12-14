@@ -1,3 +1,5 @@
+import 'package:ajev_application/core/init/navigation/navigation.dart';
+// import 'package:ajev_application/core/init/navigation/route_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/base/base_screen.dart';
 import '../../../../../core/init/constants/image/image_constants.dart';
@@ -17,6 +19,8 @@ class ServiceBikeScreen extends StatelessWidget {
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,
+          titleText: 'เลือกรุ่นรถ AJ EV',
+          showBackButton: true,
           child: _buildBikeGrid(viewmodel),
         );
       },
@@ -35,26 +39,44 @@ class ServiceBikeScreen extends StatelessWidget {
       itemCount: viewmodel.bikes.length,
       itemBuilder: (context, index) {
         final bike = viewmodel.bikes[index];
-        return _buildBikeItem(bike);
+        return _buildBikeItem(context, bike);
       },
     );
   }
 
-  Widget _buildBikeItem(BikeModel bike) {
-    return Column(
-      children: [
-        Expanded(
-          child: Image.asset(bike.imagePath, fit: BoxFit.contain),
+  Widget _buildBikeItem(BuildContext context, BikeModel bike) {
+    return GestureDetector(
+      onTap: () {
+        AppNav.toNamed(context, AppNavConstants.SERVICE_BIKE_PART_VIEW,
+            arguments: {'bikeId': bike.id.toString()});
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        const SizedBox(height: 10),
-        Text(
-          bike.name,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  bike.imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              bike.name,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

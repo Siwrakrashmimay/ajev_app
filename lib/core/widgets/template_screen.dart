@@ -1,16 +1,19 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_local_variable
 
 import 'package:ajev_application/core/extension/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 import '../../config/config.dart';
-import '../../provider/user_profile_provider.dart';
+// import '../../provider/user_profile_provider.dart';
 import '../utility/formatters.dart';
 import 'app_bar.dart';
 import 'app_error.dart';
 import 'app_loading.dart';
 import 'refreshindicatir_widget.dart';
+// import 'path/to/app_bar.dart' show AppBarThemeMode;
+
+// enum AppBarThemeMode { light, dark }
 
 class BuildTemplateMain extends StatelessWidget {
   //Scaffold
@@ -21,6 +24,7 @@ class BuildTemplateMain extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final String? imageBackground;
   //AppBar
+  final AppBarThemeMode appBarThemeMode;
   final Color? backgroundColorAppBar;
   final Color? surfaceTintColorAppBar;
   final dynamic bottom;
@@ -48,6 +52,8 @@ class BuildTemplateMain extends StatelessWidget {
   final bool scrollOnRefresh;
   final int currentPerPage;
   final int totalParPages;
+  final bool showBackButton;
+  final String titleText;
 
   const BuildTemplateMain({
     super.key,
@@ -84,13 +90,20 @@ class BuildTemplateMain extends StatelessWidget {
     this.onRefresh,
     this.scrollOnRefresh = true,
     this.currentPerPage = 1,
+    this.appBarThemeMode = AppBarThemeMode.light,
     this.totalParPages = 1,
     this.nameWidgetAppBar,
+    required this.showBackButton,
+    required this.titleText,
   });
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<UserProfileProvider>();
+    // เลือกสีพื้นหลังตามธีม
+    final Color backgroundColor = appBarThemeMode == AppBarThemeMode.light
+        ? Colors.white
+        : const Color(0xFF1A1A1A);
+
     return PopScope(
       canPop: canPop,
       onPopInvoked: onPopInvoked,
@@ -100,15 +113,15 @@ class BuildTemplateMain extends StatelessWidget {
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.instance.white(context),
-                image: imageBackground == null
-                    ? null
-                    : DecorationImage(
-                        image: AssetImage(
-                          imageBackground!,
-                        ),
-                        fit: BoxFit.none,
-                      ),
+                // ใช้สีพื้นหลังตามธีม
+                color: backgroundColor,
+                // เพิ่มการรองรับรูปพื้นหลัง
+                image: imageBackground != null
+                    ? DecorationImage(
+                        image: AssetImage(imageBackground!),
+                        fit: BoxFit.contain, // หรือ BoxFit.none ตามที่ต้องการ
+                      )
+                    : null,
               ),
               child: Scaffold(
                 key: scaffoldKey,
@@ -116,18 +129,12 @@ class BuildTemplateMain extends StatelessWidget {
                 resizeToAvoidBottomInset: resizeToAvoidBottomInset,
                 backgroundColor: Colors.transparent,
                 appBar: showAppbar
-                    ? AppBars.basic(
+                    ? CustomAppBar.createAppBar(
                         context,
-                        backgroundColor: backgroundColorAppBar,
-                        bottom: bottom,
-                        divider: divider,
-                        leading: leading,
-                        onTapLeading: onTapLeading,
-                        paddingAppBar: paddingAppBar,
-                        surfaceTintColor: surfaceTintColorAppBar,
-                        widget: widgetAppBar,
-                        nameWidget: nameWidgetAppBar,
-                        name: provider.userProfile?.fullName,
+                        showBackButton: showBackButton,
+                        titleText: titleText,
+                        onNotificationTap: () {},
+                        themeMode: appBarThemeMode, // ส่งค่าธีมที่เลือก
                       )
                     : null,
                 body: SafeArea(

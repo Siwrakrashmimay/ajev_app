@@ -14,6 +14,8 @@ class ArkScreen extends StatelessWidget {
       viewmodel: ArkView(context: context),
       builder: (context, viewmodel, child, deviceScreen) {
         return BuildTemplateMain(
+          titleText: '',
+          showBackButton: true,
           paddingScreen: EdgeInsets.zero,
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           showAppbar: true,

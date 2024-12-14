@@ -15,6 +15,7 @@ class AppNavConstants {
   // static const SUM_WORK = '/sumwork';
   // static const CUSTOMER_INFO_CHECK_IN_SALE = '/customer-info-check-in-sale';
   static const LOGIN = '/login';
+  static const LOGIN_DEALER = '/login-dealer';
   static const REGISTER = '/register';
   static const OTP_LOGIN = '/otp-login';
   static const MAIN_PANG = 'main';
@@ -28,7 +29,14 @@ class AppNavConstants {
   static const SERVICE_BIKE = '/service-bike';
   static const ARK = '/ark';
   static const NOT_FOUND = '/not-found';
-
+  static const MAIN_DEALER_PANG = '/main-dealer';
+  static const MANUAL_SCREEN = '/manual-screen';
+  static const CLAIM_SCREEN = '/claim-screen';
+  static const DISTANCE = '/distanc-screen';
+  static const GENERALREPIRS = '/generalrepirs';
+  static const SERVICE_BIKE_PART_VIEW = '/service-bike-part-view';
+  static const DISTANCEVIEW = '/distnce-view';
+  static const DISTANCE_VIEW_DETAIL = '/distance_view_detail';
   // static const ATTENDANCE_RECORD_FORM = '/attendance-record-form';
   // static const USER_PROFILE = '/user-profile';
   // static const PRIVICY_POLICY = '/privicy-policy';

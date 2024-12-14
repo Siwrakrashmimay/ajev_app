@@ -9,6 +9,8 @@ class NotFoundNavigationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BuildTemplateMain(
+      titleText: '',
+      showBackButton: false,
       child: Scaffold(
         body: Center(
             child: Text(

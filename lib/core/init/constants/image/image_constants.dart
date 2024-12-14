@@ -91,6 +91,18 @@ class ImageConstants {
 
   String get rectangle17 => toImagePng('Rectangle 17 (1)');
   String get rectangle171 => toImagePng('Rectangle 17');
+  String get aciconnavber => toImagePng('aciconnavber');
+  String get ajiconnavbar => toImagePng('ajiconnavbar');
+  String get fixnavber => toImagePng('fixnavber');
+
+  String get claimbuttonicon => toIconPng('Claim Button icon');
+  String get manualbuttonicon => toIconPng('Frame Button Manual');
+  String get servicebuttonicon => toIconPng('Frame Button Service');
+  String get repairbuttonicon => toIconPng('Frame Button Repair');
+  String get resgistgerbuttonicon => toIconPng('Register Button icon');
+  String get searchbuttonicon => toIconPng('Frame Button xxx');
+  String get battryicon => toIconPng('Battery icon');
+  String get spareparticon => toIconPng('Spare part icon');
 
   String toIconPng(String name) => 'assets/icons/$name.png';
   String toImagePng(String name) => 'assets/images/$name.png';

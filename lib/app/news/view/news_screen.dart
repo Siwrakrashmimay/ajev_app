@@ -13,6 +13,8 @@ class NewsScreen extends StatelessWidget {
       viewmodel: NewsView(context: context),
       builder: (context, viewmodel, child, deviceScreen) {
         return BuildTemplateMain(
+          showBackButton: false,
+          titleText: 'ข่าวสาร',
           nameWidgetAppBar: 'ข่าวสาร',
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,

@@ -16,6 +16,8 @@ class ServicePartScreen extends StatelessWidget {
         viewmodel: ServicePartView(context: context),
         builder: (context, viewmodel, child, deviceScreen) {
           return BuildTemplateMain(
+              titleText: '',
+              showBackButton: true,
               imageBackground: ImageConstants.instance.backgrouniconAJ,
               paddingScreen: EdgeInsets.zero,
               showAppbar: true,

@@ -64,7 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Background gradient widget
   Widget _buildBackground(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -83,7 +82,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // ทำให้โลโก้ค่อยๆเลื่อนขึ้น
   Widget _buildAnimatedLogo(BuildContext context) {
     return AnimatedPositioned(
       top: _isLogoMovedUp ? 100 : MediaQuery.of(context).size.height * 0.4,

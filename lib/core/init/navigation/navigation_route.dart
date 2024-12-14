@@ -1,9 +1,12 @@
 import 'package:ajev_application/app/accuont/ark/view/ark_screen.dart';
+import 'package:ajev_application/app/authentication/login_dealer/view/login_screen.dart';
 import 'package:ajev_application/app/bike/bike_detail/view/bike_detail_screen.dart';
 import 'package:ajev_application/app/bike/view/bike_screen.dart';
+import 'package:ajev_application/app/main/distance/view/addnewuser_screen.dart';
+import 'package:ajev_application/app/main/generalrepairs/view/addnewuser_screen.dart';
 import 'package:ajev_application/app/main/view/main_screen.dart';
+import 'package:ajev_application/app/main_dealer/view/main_user_screen.dart';
 import 'package:ajev_application/app/main_user/view/main_user_screen.dart';
-import 'package:ajev_application/app/main_user/view_model/main_user_view.dart';
 import 'package:ajev_application/app/service/service_part/service_battary/view/service_battary_screen.dart';
 import 'package:ajev_application/app/service/service_part/view/service_part_screen.dart';
 import 'package:ajev_application/app/service/view/service_screen.dart';
@@ -12,6 +15,11 @@ import 'package:flutter/cupertino.dart';
 import '../../../app/authentication/login/view/login_screen.dart';
 import '../../../app/authentication/resgister/view/resgister_screen.dart';
 import '../../../app/main/addnewuser/view/addnewuser_screen.dart';
+import '../../../app/main/claim/view/claim_screen.dart';
+import '../../../app/main/distance/distance-view/distance-view-detail/view/distance_view_detail_screen.dart';
+import '../../../app/main/distance/distance-view/view/distance_view_screen.dart';
+import '../../../app/manual/view/manual_screen.dart';
+import '../../../app/service/service_part/service_bike/service_bike_part/view/service_bike_part_screen.dart';
 import '../../../app/service/service_part/service_bike/view/service_bike_screen.dart';
 import '../../../app/splash/view/splash_screen.dart';
 import '../../widgets/not_found_navigation.dart';
@@ -36,6 +44,12 @@ class NavigationRoute {
         return normalNavigate(
           const LoginScreen(),
           AppNavConstants.LOGIN,
+          settings.arguments,
+        );
+      case AppNavConstants.LOGIN_DEALER:
+        return normalNavigate(
+          const LoginDealerScreen(),
+          AppNavConstants.LOGIN_DEALER,
           settings.arguments,
         );
 
@@ -109,6 +123,59 @@ class NavigationRoute {
         return normalNavigate(
           const MainUserScreen(),
           AppNavConstants.MAIN_USER_PANG,
+          settings.arguments,
+        );
+
+      case AppNavConstants.MAIN_DEALER_PANG:
+        return normalNavigate(
+          const MainDealerScreen(),
+          AppNavConstants.MAIN_DEALER_PANG,
+          settings.arguments,
+        );
+
+      case AppNavConstants.MANUAL_SCREEN:
+        return normalNavigate(
+          const ManualScreen(),
+          AppNavConstants.MANUAL_SCREEN,
+          settings.arguments,
+        );
+      case AppNavConstants.CLAIM_SCREEN:
+        return normalNavigate(
+          const ClaimScreen(),
+          AppNavConstants.MANUAL_SCREEN,
+          settings.arguments,
+        );
+      case AppNavConstants.DISTANCE:
+        return normalNavigate(
+          const DistanceScreen(),
+          AppNavConstants.DISTANCE,
+          settings.arguments,
+        );
+      case AppNavConstants.GENERALREPIRS:
+        return normalNavigate(
+          const GeneralrepirsScreen(),
+          AppNavConstants.GENERALREPIRS,
+          settings.arguments,
+        );
+
+      case AppNavConstants.DISTANCEVIEW:
+        return normalNavigate(
+          const DistanceScreenView(),
+          AppNavConstants.DISTANCEVIEW,
+          settings.arguments,
+        );
+
+      case AppNavConstants.SERVICE_BIKE_PART_VIEW:
+        return normalNavigate(
+          const ServiceBikePartScreen(),
+          AppNavConstants.SERVICE_BIKE_PART_VIEW,
+          settings.arguments,
+        );
+
+      case AppNavConstants.DISTANCE_VIEW_DETAIL:
+        return normalNavigate(
+          const DistanceViewDetailScreen(),
+          AppNavConstants.DISTANCE_VIEW_DETAIL,
           settings.arguments,
         );
 

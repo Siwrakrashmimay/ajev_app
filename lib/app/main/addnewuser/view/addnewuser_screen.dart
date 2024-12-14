@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/base/base_screen.dart';
 import '../../../../core/init/constants/image/image_constants.dart';
+import '../../../../core/init/navigation/navigation.dart';
 import '../../../../core/widgets/template_screen.dart';
 import '../view-model/addnewuser_view.dart';
 
@@ -20,6 +21,8 @@ class AddnewuserScreen extends StatelessWidget {
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,
+          titleText: 'ลงทะเบียนลูกค้ารถลูกค้า',
+          showBackButton: true,
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: _buildMainBody(context),
@@ -33,23 +36,22 @@ class AddnewuserScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildTextField(context, 'ชื่อ-นามสกุล', 'First–Last Name',
-            width: 350, height: 60),
+        _buildTextField(context, 'ชื่อ-นามสกุล', width: 350, height: 60),
         const SizedBox(height: 10),
-        _buildTextField(context, 'เบอร์โทรศัพท์', 'Phone Number',
-            width: 350, height: 60),
+        _buildTextField(context, 'เบอร์โทรศัพท์', width: 350, height: 60),
         const SizedBox(height: 10),
-        _buildTextField(context, 'อีเมล', 'E-mail', width: 350, height: 50),
+        _buildTextField(context, 'อีเมล', width: 350, height: 50),
         const SizedBox(height: 10),
-        _buildDropdownField(context, 'รุ่นรถ', 'Model'),
+        _buildDropdownField(context, 'รุ่นรถ'),
         const SizedBox(height: 10),
-        _buildDropdownField(context, 'สี', 'Color'),
+        _buildDropdownField(
+          context,
+          'สี',
+        ),
         const SizedBox(height: 10),
-        _buildTextField(context, 'วันที่ซื้อขาย', 'Date of issue',
-            width: 350, height: 60),
+        _buildTextField(context, 'วันที่ซื้อขาย', width: 350, height: 60),
         const SizedBox(height: 10),
-        _buildTextField(context, 'เลขทะเบียนรถ', 'License Plate Number',
-            width: 350, height: 50),
+        _buildTextField(context, 'เลขทะเบียนรถ', width: 350, height: 50),
         const SizedBox(height: 10),
         _buildTextFieldWithIcon(
           context,
@@ -62,17 +64,18 @@ class AddnewuserScreen extends StatelessWidget {
             print('QR Code scanner icon tapped');
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 30),
+        _buildSearchButton(context)
       ],
     );
   }
 
-  Widget _buildTextField(BuildContext context, String label, String hint,
+  Widget _buildTextField(BuildContext context, String label,
       {double width = 300, double height = 50}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label   $hint', style: const TextStyle(fontSize: 16)),
+        Text(label, style: const TextStyle(fontSize: 16)),
         const SizedBox(height: 5),
         SizedBox(
           width: width,
@@ -126,11 +129,11 @@ class AddnewuserScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDropdownField(BuildContext context, String label, String hint) {
+  Widget _buildDropdownField(BuildContext context, String label) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label   $hint', style: const TextStyle(fontSize: 16)),
+        Text(label, style: const TextStyle(fontSize: 16)),
         const SizedBox(height: 5),
         SizedBox(
           width: 350,
@@ -152,6 +155,30 @@ class AddnewuserScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildSearchButton(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: 250,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: () {
+            AppNav.toNamed(context, AppNavConstants.BIKE_DETAIL);
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+          ),
+          child: const Text(
+            'ค้นหา',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 }

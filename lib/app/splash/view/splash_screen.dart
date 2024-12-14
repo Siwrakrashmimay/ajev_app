@@ -112,7 +112,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             _buildButton(context, "ผู้ใช้บริการ", Colors.black, 250, 60),
             const SizedBox(height: 20),
-            _buildButton(context, "ร้านตัวแทนจำหน่าย", Colors.black, 250, 60),
+            _buildButtonDealer(
+                context, "ร้านตัวแทนจำหน่าย", Colors.black, 250, 60),
           ],
         ),
       ),
@@ -142,6 +143,41 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           onPressed: () {
             AppNav.toNamed(context, AppNavConstants.LOGIN);
+          },
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(color: textColor, fontSize: 18),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButtonDealer(BuildContext context, String text, Color textColor,
+      double width, double height) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              side: BorderSide.none,
+            ),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+          ),
+          onPressed: () {
+            AppNav.toNamed(context, AppNavConstants.LOGIN_DEALER);
           },
           child: Center(
             child: Text(

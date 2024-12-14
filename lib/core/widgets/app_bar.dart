@@ -1,99 +1,82 @@
-// ignore_for_file: unnecessary_string_interpolations
-
-import 'package:ajev_application/core/extension/extension.dart';
 import 'package:flutter/material.dart';
-import '../init/constants/image/image_constants.dart';
-import '../init/navigation/route_manager.dart';
-import 'app_image_view.dart';
-import 'inkwell.dart';
 
-class AppBars {
-  static AppBar basic(
+class CustomAppBar {
+  static AppBar createAppBar(
     BuildContext context, {
-    Widget? leading,
-    EdgeInsetsGeometry? paddingAppBar,
-    void Function()? onTapLeading,
-    bool divider = false,
-    Color? backgroundColor,
-    Color? surfaceTintColor,
-    Widget? widget,
-    String? nameWidget,
-    dynamic bottom,
-    String? name,
+    bool showBackButton = true,
+    String titleText = '',
+    VoidCallback? onNotificationTap,
+    AppBarThemeMode themeMode = AppBarThemeMode.light, // Add a theme mode
   }) {
+    final bool isDark = themeMode == AppBarThemeMode.dark;
+
     return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: backgroundColor ?? Colors.white,
-      surfaceTintColor: surfaceTintColor,
+      backgroundColor: isDark ? const Color(0xFF1A1A1A) : Colors.white,
       elevation: 0,
-      title: SizedBox(
-        height: kToolbarHeight,
-        width: context.width,
-        child: Padding(
-          padding:
-              paddingAppBar ?? EdgeInsets.only(right: context.paddingScreen),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              nameWidget == null
-                  ? Container(
-                      padding: EdgeInsets.only(
-                        top: context.paddingScreen,
-                        left: context.paddingScreen,
-                        right: context.normalValue,
-                      ),
-                      height: double.infinity,
-                      child: BuildInkWell(
-                        onTap: onTapLeading ?? () => AppNav.close(context),
-                        child: leading ??
-                            Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
-                              size: context.iconSizeButton,
-                            ),
-                      ),
-                    )
-                  : Container(
-                      padding: EdgeInsets.only(
-                        top: context.paddingScreen,
-                        left: context.paddingScreen,
-                        right: context.normalValue,
-                      ),
-                      height: double.infinity,
-                      child: BuildInkWell(
-                        onTap: onTapLeading ?? () => AppNav.close(context),
-                        child: leading ??
-                            Text(
-                              '$nameWidget',
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
-                            ),
-                      ),
-                    ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Transform.translate(
-                    offset: const Offset(0, 10),
-                    child: widget ??
-                        AppImageView.imageAsset(
-                          context,
-                          name: ImageConstants.instance.logoajev,
-                          width: 40,
-                          height: 40,
-                          fit: BoxFit.contain,
-                        ),
-                  ),
+      automaticallyImplyLeading: false,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (showBackButton)
+            IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: isDark ? Colors.white : const Color(0xFF1A1A1A),
+                size: 20,
+              ),
+            )
+          else
+            const SizedBox(width: 48),
+          Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                titleText,
+                style: TextStyle(
+                  color: isDark ? Colors.white : const Color(0xFF1A1A1A),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+          IconButton(
+            onPressed: onNotificationTap,
+            icon: Stack(
+              children: [
+                Icon(
+                  Icons.notifications_outlined,
+                  color:
+                      isDark ? Colors.tealAccent.shade400 : Colors.red.shade400,
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      color: isDark ? Colors.tealAccent.shade700 : Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        '1',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 8,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      titleSpacing: 0,
-      bottom: bottom,
+      centerTitle: true,
     );
   }
 }
+
+enum AppBarThemeMode { light, dark } // Enum for light and dark modes

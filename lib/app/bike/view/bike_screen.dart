@@ -21,6 +21,8 @@ class BikeScreen extends StatelessWidget {
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,
+          showBackButton: true,
+          titleText: 'ข้อมูลลูกค้า',
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: _buildMainBody(context),
@@ -34,10 +36,10 @@ class BikeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          'ค้นหาข้อมูลลูกค้า',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
+        // const Text(
+        //   'ค้นหาข้อมูลลูกค้า',
+        //   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        // ),
         const SizedBox(height: 10),
         _buildSearchField(context),
         const SizedBox(height: 20),

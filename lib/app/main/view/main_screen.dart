@@ -115,6 +115,8 @@ class MainContentScreen extends StatelessWidget {
               imageBackground: ImageConstants.instance.backgrouniconAJ,
               paddingScreen: EdgeInsets.zero,
               showAppbar: true,
+              showBackButton: false,
+              titleText: 'หน้าหลัก',
               child: Center(child: _buildMainBody(context)));
         });
   }

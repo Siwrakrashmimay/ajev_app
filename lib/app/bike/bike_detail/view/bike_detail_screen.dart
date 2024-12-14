@@ -18,6 +18,8 @@ class BikeDetailScreen extends StatelessWidget {
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,
+          titleText: '',
+          showBackButton: true,
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: _buildMainBody(context),

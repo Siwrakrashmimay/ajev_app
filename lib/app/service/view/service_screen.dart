@@ -12,103 +12,153 @@ class ServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
-        onInit: (viewmodel) {},
-        viewmodel: ServiceView(context: context),
-        builder: (context, viewmodel, child, deviceScreen) {
-          return BuildTemplateMain(
-              nameWidgetAppBar: 'การรับบริการ',
-              imageBackground: ImageConstants.instance.backgrouniconAJ,
-              paddingScreen: EdgeInsets.zero,
-              showAppbar: true,
-              child: Center(child: _buildMainBody(context)));
-        });
-  }
-
-  Widget _buildMainBody(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildTopSection(context),
-        const SizedBox(height: 30),
-        _buildBottomSection(context),
-      ],
-    );
-  }
-
-  Widget _buildTopSection(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          ImageConstants.instance.group481,
-          width: 200,
-          height: 150,
-        ),
-        const SizedBox(height: 10),
-        _buildButton(
-            context, 'คิวนัดหมายเข้ารับบริการ', Colors.white, () {}, 250, 75),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            'ตรวจเช็คตารงคิวการเข้ารับบริการของลูกค้า',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomSection(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          ImageConstants.instance.group49,
-          width: 200,
-          height: 150,
-        ),
-        const SizedBox(height: 10),
-        _buildButton(context, 'เบิกอะไหล่', Colors.white, () {
-          AppNav.toNamed(context, AppNavConstants.SERVICE_PART);
-        }, 250, 75),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            'เช็คราคา และ สถานะการเบิกอะไหล่',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildButton(BuildContext context, String text, Color textColor,
-      VoidCallback onPressed, double width, double height) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(40.0),
-        ),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              side: BorderSide.none,
-            ),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-          ),
-          onPressed: onPressed,
+      onInit: (viewmodel) {},
+      viewmodel: ServiceView(context: context),
+      builder: (context, viewmodel, child, deviceScreen) {
+        return BuildTemplateMain(
+          nameWidgetAppBar: 'เบิกอะไหล่',
+          imageBackground: ImageConstants.instance.backgrouniconAJ,
+          paddingScreen: EdgeInsets.zero,
+          // showAppbar: true,
+          showBackButton: false,
+          titleText: 'เบิกอะไหล่',
           child: Center(
-            child: Text(
-              text,
-              style: TextStyle(color: textColor, fontSize: 22),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _buildGrid(context),
             ),
           ),
+        );
+      },
+    );
+  }
+
+  Widget _buildGrid(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      shrinkWrap: true,
+      children: [
+        _buildServiceTile(
+          icon: ImageConstants.instance.battryicon,
+          label: 'แบตเตอรี่',
+          width: 100,
+          height: 120,
+          onTap: () {
+            AppNav.toNamed(context, AppNavConstants.SERVICE_BATTERY);
+          },
         ),
+        _buildServiceTile(
+          icon: ImageConstants.instance.spareparticon,
+          label: 'ชิ้นส่วนอะไหล่',
+          width: 120,
+          height: 120,
+          onTap: () {
+            AppNav.toNamed(context, AppNavConstants.SERVICE_BIKE);
+          },
+        ),
+        _buildEmptyGridItem(),
+        _buildEmptyGridItem(),
+        _buildEmptyGridItem(),
+        _buildEmptyGridItem(),
+      ],
+    );
+  }
+
+  // Widget _buildGridItem(
+  //   BuildContext context, {
+  //   required String iconPath,
+  //   required String label,
+  //   required VoidCallback onPressed,
+  // }) {
+  //   return GestureDetector(
+  //     onTap: onPressed,
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         color: const Color(0xFF1A1A1A),
+  //         borderRadius: BorderRadius.circular(20),
+  //       ),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Image.asset(
+  //             iconPath,
+  //             width: 50,
+  //             height: 50,
+  //             color: Colors.white,
+  //           ),
+  //           const SizedBox(height: 10),
+  //           Text(
+  //             label,
+  //             style: const TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 16,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget _buildServiceTile({
+    required String icon,
+    required String label,
+    required double width,
+    required double height,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 35, 35, 35),
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 6.0,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: width,
+              height: height,
+              child: Image.asset(
+                icon,
+                // fit: BoxFit.contain,
+                color: Colors.white,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyGridItem() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(20),
       ),
     );
   }

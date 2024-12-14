@@ -24,6 +24,8 @@ class ResgisterScreen extends StatelessWidget {
               canPop: false,
               loading: viewmodel.loading,
               showAppbar: false,
+              showBackButton: false,
+              titleText: '',
               onPopInvoked: (didPop) => viewmodel.isExitWarning(context),
               paddingScreen: EdgeInsets.zero,
               imageBackground: ImageConstants.instance.splashscreen,

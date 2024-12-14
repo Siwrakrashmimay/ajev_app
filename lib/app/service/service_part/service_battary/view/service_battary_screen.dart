@@ -17,6 +17,8 @@ class ServiceBattaryScreen extends StatelessWidget {
           imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,
+          titleText: 'รุ่นแบตเตอรี่',
+          showBackButton: true,
           child: _buildBatteryList(viewmodel),
         );
       },
@@ -24,12 +26,23 @@ class ServiceBattaryScreen extends StatelessWidget {
   }
 
   Widget _buildBatteryList(ServiceBattaryView viewmodel) {
-    return ListView.builder(
-      itemCount: viewmodel.batteries.length,
-      itemBuilder: (context, index) {
-        final battery = viewmodel.batteries[index];
-        return _buildBatteryItem(battery);
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ListView.separated(
+        itemCount: viewmodel.batteries.length,
+        separatorBuilder: (context, index) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 120.0),
+          child: Divider(
+            color: Colors.grey,
+            thickness: 1,
+            height: 15,
+          ),
+        ),
+        itemBuilder: (context, index) {
+          final battery = viewmodel.batteries[index];
+          return _buildBatteryItem(battery);
+        },
+      ),
     );
   }
 
@@ -40,6 +53,7 @@ class ServiceBattaryScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -61,10 +75,13 @@ class ServiceBattaryScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: Image.asset(battery.imagePath, fit: BoxFit.contain),
+          const SizedBox(width: 16), // เพิ่มระยะห่างระหว่าง Text และ Image
+          Expanded(
+            flex: 1, // Flex สำหรับ Image
+            child: SizedBox(
+              height: 100,
+              child: Image.asset(battery.imagePath, fit: BoxFit.contain),
+            ),
           ),
         ],
       ),

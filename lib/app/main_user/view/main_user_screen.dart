@@ -1,34 +1,40 @@
 // ignore_for_file: library_private_types_in_public_api, no_leading_underscores_for_local_identifiers
 
-import 'package:ajev_application/app/main_user/view_model/main_user_view.dart';
-import 'package:ajev_application/core/extension/extension.dart';
+import 'package:ajev_application/core/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/base/base_screen.dart';
 import '../../../core/init/constants/image/image_constants.dart';
 import '../../../core/widgets/template_screen.dart';
 import '../../accuont/view/accuont_screen.dart';
-import '../../bike/view/bike_screen.dart';
-import '../../news/view/news_screen.dart';
+// import '../../bike/view/bike_screen.dart';
+// import '../../news/view/news_screen.dart';
 import '../../service/view/service_screen.dart';
+import '../view_model/main_user_view.dart';
+
+// floatingActionButton: FloatingActionButton(
+//   onPressed: _toggleTheme,
+//   backgroundColor: _themeMode == ThemeMode.normal
+//       ? const Color(0xFF1A1A1A)
+//       : Colors.white,
+//   child: Icon(
+//     Icons.brightness_6,
+//     color: _themeMode == ThemeMode.normal ? Colors.white : Colors.black,
+//   ),
+// ),
+
+enum ThemeMode { normal, white }
 
 class MainUserScreen extends StatefulWidget {
   const MainUserScreen({super.key});
 
   @override
-  _MainUSerScreenState createState() => _MainUSerScreenState();
+  _MainUserScreenState createState() => _MainUserScreenState();
 }
 
-class _MainUSerScreenState extends State<MainUserScreen> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const MainContentScreen(),
-    const BikeScreen(),
-    const ServiceScreen(),
-    const NewsScreen(),
-    const AccuontScreen(),
-  ];
+class _MainUserScreenState extends State<MainUserScreen> {
+  int _selectedIndex = 1;
+  ThemeMode _themeMode = ThemeMode.white;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -36,65 +42,187 @@ class _MainUSerScreenState extends State<MainUserScreen> {
     });
   }
 
+  void _toggleTheme() {
+    setState(() {
+      _themeMode =
+          _themeMode == ThemeMode.normal ? ThemeMode.white : ThemeMode.normal;
+    });
+  }
+
+  final List<Widget> _pages = [
+    const ServiceScreen(),
+    const MainContentScreen(),
+    const AccuontScreen(),
+  ];
+
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: _pages, // Display selected page from list
+        children: _pages,
       ),
-      bottomNavigationBar: _buildCustomNavigationBar(),
+      bottomNavigationBar: _buildCustomBottomNavBar(),
+      floatingActionButton: Transform.translate(
+        offset: const Offset(0, 30),
+        child: _buildCenterButton(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  Widget _buildCustomNavigationBar() {
+  Widget _buildCustomBottomNavBar() {
+    final Color backgroundColor =
+        _themeMode == ThemeMode.normal ? const Color(0xFF1A1A1A) : Colors.white;
+    final Color iconColor =
+        _themeMode == ThemeMode.normal ? Colors.white : const Color(0xFF1A1A1A);
+
     return Container(
-      color: const Color(0xFF1A1A1A), // Background color
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      height: 95,
+      decoration: BoxDecoration(color: backgroundColor),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(
-            index: 0,
-            iconPath: ImageConstants.instance.home,
-            selectedIconPath: ImageConstants.instance.hometap,
+          Expanded(
+            child: _buildNavItem(
+              index: 0,
+              icon: Icons.build_outlined,
+              label: 'เบิก/เคลม',
+              iconColor: iconColor,
+            ),
           ),
-          _buildNavItem(
-            index: 1,
-            iconPath: ImageConstants.instance.bike,
-            selectedIconPath: ImageConstants.instance.biketap,
-          ),
-          _buildNavItem(
-            index: 2,
-            iconPath: ImageConstants.instance.service,
-            selectedIconPath: ImageConstants.instance.servicetap,
-          ),
-          _buildNavItem(
-            index: 3,
-            iconPath: ImageConstants.instance.news,
-            selectedIconPath: ImageConstants.instance.newstap,
-          ),
-          _buildNavItem(
-            index: 4,
-            iconPath: ImageConstants.instance.vector,
-            selectedIconPath: ImageConstants.instance.vectortap,
+          const SizedBox(width: 80),
+          Expanded(
+            child: _buildNavItem(
+              index: 2,
+              icon: Icons.person_outline,
+              label: 'บัญชี',
+              iconColor: iconColor,
+            ),
           ),
         ],
       ),
     );
   }
 
+  Widget _buildCenterButton() {
+    final bool isSelected = _selectedIndex == 1;
+    final Color backgroundColor =
+        _themeMode == ThemeMode.normal ? const Color(0xFF1A1A1A) : Colors.white;
+    final Color textColor =
+        _themeMode == ThemeMode.normal ? Colors.white : const Color(0xFF1A1A1A);
+
+    return GestureDetector(
+      onTap: () => _onItemTapped(1),
+      child: Container(
+        height: 110,
+        width: 140,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: backgroundColor,
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            isSelected
+                ? ShaderMask(
+                    shaderCallback: (bounds) => LinearGradient(
+                      colors: [
+                        Colors.tealAccent.shade700,
+                        Colors.cyanAccent.shade400
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ).createShader(bounds),
+                    child: Image.asset(
+                      ImageConstants.instance.ajiconnavbar,
+                      width: 57,
+                      height: 57,
+                      color: textColor,
+                      colorBlendMode: BlendMode.srcATop,
+                    ),
+                  )
+                : Image.asset(
+                    ImageConstants.instance.ajiconnavbar,
+                    width: 57,
+                    height: 57,
+                    color: textColor,
+                  ),
+            Positioned(
+              bottom: 0,
+              child: isSelected
+                  ? ShaderMask(
+                      shaderCallback: (bounds) => LinearGradient(
+                        colors: [
+                          Colors.tealAccent.shade700,
+                          Colors.cyanAccent.shade400
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ).createShader(bounds),
+                      child: Text(
+                        'AJ EV',
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 10.0,
+                              color: Colors.tealAccent.shade700,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  : Text(
+                      'AJ EV',
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildNavItem({
     required int index,
-    required String iconPath,
-    required String selectedIconPath,
+    required IconData icon,
+    required String label,
+    required Color iconColor,
   }) {
-    return InkWell(
+    final bool isSelected = _selectedIndex == index;
+
+    return GestureDetector(
       onTap: () => _onItemTapped(index),
-      child: Image.asset(
-        _selectedIndex == index ? selectedIconPath : iconPath,
-        width: 60,
-        height: 60,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? const Color(0xFF00E3F4) : iconColor,
+            size: 35,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? const Color(0xFF00E3F4) : iconColor,
+              fontSize: 15,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -110,177 +238,192 @@ class MainContentScreen extends StatelessWidget {
       viewmodel: MainUserView(context: context),
       builder: (context, viewmodel, child, deviceScreen) {
         return BuildTemplateMain(
-          nameWidgetAppBar: 'หน้าหลัก',
+          appBarThemeMode: AppBarThemeMode.dark,
+          nameWidgetAppBar: 'ข้อมูลลูกค้า',
+          imageBackground: ImageConstants.instance.backgrouniconAJ,
           paddingScreen: EdgeInsets.zero,
           showAppbar: true,
-          child: Center(
+          showBackButton: false,
+          titleText: 'ข้อมูลลูกค้า',
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
-              child: _buildMainBody(context),
-            ),
+                child: Column(
+              children: [
+                _buildTopInfoBar(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      // const SizedBox(height: 5),
+                      _buildVehicleImage(context),
+                      const SizedBox(height: 20),
+                      _buildBatteryAndStatusRow(),
+                      const SizedBox(height: 30),
+                      _buildLockSlider(),
+                      const SizedBox(height: 30),
+                      _buildActionButtons(context, viewmodel),
+                    ],
+                  ),
+                ),
+              ],
+            )),
           ),
         );
       },
     );
   }
 
-  Widget _buildMainBody(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+  Widget _buildVehicleImage(
+    BuildContext context,
+  ) {
+    return Stack(
+      alignment: Alignment.center,
       children: [
-        _buildTopSection(context),
-        const SizedBox(height: 30),
-        _buildLockSlider(context),
-        const SizedBox(height: 30),
-        _buildActionIcons(context),
-      ],
-    );
-  }
-
-  Widget _buildTopSection(BuildContext context) {
-    return Column(
-      children: [
+        // Opacity(
+        //   opacity: 0.1,
+        //   child: Image.asset(
+        //     'assets/images/background_logo.png', // โลโก้พื้นหลัง
+        //     width: 300,
+        //   ),
+        // ),
         Image.asset(
           ImageConstants.instance.goddessimg00,
-          width: 400,
-          height: context.dynamicHeight(0.4),
+          width: 350,
+          height: 300,
+          fit: BoxFit.contain,
         ),
-        const SizedBox(height: 10),
-        _buildBatteryStatus(context),
       ],
     );
   }
 
-  Widget _buildBatteryStatus(BuildContext context) {
-    return Column(
+  Widget _buildBatteryAndStatusRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildBatteryBar(context, 0.9, '100%'),
-        const SizedBox(height: 10),
-        _buildBatteryBar(context, 0.2, '100%'),
-      ],
-    );
-  }
-
-  Widget _buildBatteryBar(BuildContext context, double percent, String label) {
-    return SizedBox(
-      width: context.width * 0.8,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 8,
-            child: Stack(
+        const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Container(
-                  height: 20,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.grey.shade300,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 20,
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade700,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          FractionallySizedBox(
-                            widthFactor: percent,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.lightBlue.shade50,
-                                    Colors.blue.shade700,
-                                  ],
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                Icon(Icons.battery_charging_full, color: Colors.blue, size: 18),
+                SizedBox(width: 5),
+                Text(
+                  '98%',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],
             ),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            label,
-            style: const TextStyle(color: Colors.black),
-          ),
-        ],
-      ),
+            SizedBox(height: 5),
+            Row(
+              children: [
+                Icon(Icons.battery_alert, color: Colors.red, size: 18),
+                SizedBox(width: 5),
+                Text(
+                  '18%',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              'ระยะทางที่เหลือ: 55 กม.',
+              style: TextStyle(color: Colors.white70, fontSize: 12),
+            ),
+          ],
+        ),
+
+        // Vehicle Status Section
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            const Text(
+              'ตรวจเช็คสถานะ:',
+              style: TextStyle(color: Colors.white70, fontSize: 12),
+            ),
+            const SizedBox(height: 5),
+            ElevatedButton.icon(
+              onPressed: () {
+                // Handle vehicle status
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              ),
+              icon: const Icon(
+                Icons.close,
+                size: 16,
+                color: Colors.white,
+              ),
+              label: const Text(
+                'สถานะรถผิดปกติ',
+                style: TextStyle(color: Colors.white, fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
-  // Build the lock/unlock slider (remains unchanged)
-  Widget _buildLockSlider(BuildContext context) {
-    double _dragPercent = 0.0;
-    bool _isLocked = true;
+  Widget _buildLockSlider() {
+    double dragPercent = 0.0;
+    bool isLocked = true;
 
     return StatefulBuilder(
       builder: (context, setState) {
-        void _onHorizontalDragUpdate(DragUpdateDetails details) {
+        void onHorizontalDragUpdate(DragUpdateDetails details) {
           setState(() {
-            _dragPercent += details.primaryDelta! / 200;
-            _dragPercent = _dragPercent.clamp(0.0, 1.0);
+            dragPercent += details.primaryDelta! / 300;
+            dragPercent = dragPercent.clamp(0.0, 1.0);
           });
         }
 
-        void _onHorizontalDragEnd(DragEndDetails details) {
+        void onHorizontalDragEnd(DragEndDetails details) {
           setState(() {
-            if (_dragPercent > 0.6) {
-              _isLocked = false;
-            } else {
-              _isLocked = true;
-            }
-            _dragPercent = _isLocked ? 0.0 : 1.0;
+            isLocked = dragPercent < 0.6;
+            dragPercent = isLocked ? 0.0 : 1.175;
           });
         }
 
         return GestureDetector(
-          onHorizontalDragUpdate: _onHorizontalDragUpdate,
-          onHorizontalDragEnd: _onHorizontalDragEnd,
+          onHorizontalDragUpdate: onHorizontalDragUpdate,
+          onHorizontalDragEnd: onHorizontalDragEnd,
           child: Stack(
             alignment: Alignment.centerLeft,
             children: [
               Container(
                 height: 50,
-                width: 300,
+                width: double.infinity,
                 decoration: BoxDecoration(
-                  color: _isLocked ? Colors.grey.shade800 : Colors.blue,
-                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.grey.shade800,
+                  borderRadius: BorderRadius.circular(25),
                 ),
                 child: const Center(
                   child: Text(
-                    'ปลดล็อครถ/ล็อครถ',
+                    'เลื่อนเพื่อปลดล็อครถ',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
               AnimatedPositioned(
-                left: _dragPercent * 250,
+                left: dragPercent * 240,
                 duration: const Duration(milliseconds: 300),
                 child: Container(
-                  height: 60,
-                  width: 60,
+                  height: 50,
+                  width: 50,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
                   child: Icon(
-                    _isLocked ? Icons.lock : Icons.lock_open,
-                    color: _isLocked ? Colors.grey : Colors.blue,
+                    isLocked ? Icons.lock : Icons.lock_open,
+                    color: isLocked ? Colors.grey : Colors.blue,
                   ),
                 ),
               ),
@@ -291,31 +434,134 @@ class MainContentScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionIcons(BuildContext context) {
+  Widget _buildTopInfoBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              _buildTopIcon(Icons.wifi, '5G'),
+              const SizedBox(width: 10),
+              _buildTopIcon(Icons.phone, ''),
+              const SizedBox(width: 10),
+              _buildTopIcon(Icons.bluetooth, ''),
+            ],
+          ),
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'ความเร็วโดยเฉลี่ย',
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '42 กม./ชม.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTopIcon(IconData icon, String label) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildActionIcon(Icons.volume_up, 'ส่งสัญญาณตามหารถ'),
-        _buildActionIcon(Icons.volume_off, 'ปิดเสียงกันขโมย'),
+        Icon(
+          icon,
+          color: Colors.white,
+          size: 20,
+        ),
+        if (label.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: Text(
+              label,
+              style: const TextStyle(color: Colors.white, fontSize: 12),
+            ),
+          ),
       ],
     );
   }
 
-  Widget _buildActionIcon(IconData icon, String label) {
-    return Column(
+  Widget _buildActionButtons(BuildContext context, MainUserView viewModel) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CircleAvatar(
-          backgroundColor: Colors.grey.shade800,
-          radius: 30,
-          child: Icon(icon, color: Colors.white, size: 30),
+        _buildCustomActionButton(
+          icon: Icons.volume_up,
+          label: 'ส่งสัญญาณ\nตามหารถ',
+          isSelected: viewModel.isFirstButtonSelected,
+          onTap: viewModel.toggleFirstButton,
         ),
-        const SizedBox(height: 5),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-          textAlign: TextAlign.center,
+        _buildCustomActionButton(
+          icon: Icons.volume_off,
+          label: 'ปิดสัญญาณ\nกันขโมย',
+          isSelected: viewModel.isSecondButtonSelected,
+          onTap: viewModel.toggleSecondButton,
         ),
       ],
+    );
+  }
+
+  Widget _buildCustomActionButton({
+    required IconData icon,
+    required String label,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 140,
+        height: 60,
+        decoration: BoxDecoration(
+          gradient: isSelected
+              ? const LinearGradient(
+                  colors: [Color(0xFF4FACFE), Color(0xFF00F2FE)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                )
+              : null, // ไม่มี Gradient เมื่อไม่ได้เลือก
+          color: isSelected ? null : Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 5,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Colors.white : Colors.black,
+              size: 24,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
