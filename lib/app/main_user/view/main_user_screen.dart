@@ -1,12 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api, no_leading_underscores_for_local_identifiers
 
+import 'package:ajev_application/app/user_account/view/accuont_screen.dart';
+import 'package:ajev_application/app/user_srvice/view/service_screen.dart';
 import 'package:ajev_application/core/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/base/base_screen.dart';
 import '../../../core/init/constants/image/image_constants.dart';
 import '../../../core/widgets/template_screen.dart';
-import '../../accuont/view/accuont_screen.dart';
+// import '../../accuont/view/accuont_screen.dart';
 // import '../../bike/view/bike_screen.dart';
 // import '../../news/view/news_screen.dart';
 import '../../service/view/service_screen.dart';
@@ -50,9 +52,9 @@ class _MainUserScreenState extends State<MainUserScreen> {
   }
 
   final List<Widget> _pages = [
-    const ServiceScreen(),
+    const ServiceUserScreen(),
     const MainContentScreen(),
-    const AccuontScreen(),
+    const AccuontUserScreen(),
   ];
 
   // void _onItemTapped(int index) {
